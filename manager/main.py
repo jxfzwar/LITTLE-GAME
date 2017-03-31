@@ -22,7 +22,7 @@ def case(original,now):
     if (now-original) / original <= -0.4:
         return ['DAMN IT! LARGE DECREASE', (now-original) / original]
 
-original_money = 100
+original_money = 500
 original_price1 = 1
 original_price2 = 5
 original_price3 = 10
@@ -136,9 +136,13 @@ while step<11:
             print '************************************************ \n' \
                   'THE LEVEL OF YOUR STORAGE: LV.%s' % (storage)
 
-            print '************************************************ \n' \
-                  'THE GOODS ON STORAGE: %d, AND REMAIN STORAGE: %d' % (
-                  sum_number, storage_level[storage][0] - sum_number)
+            if storage == 'inf' or storage == 'INF':
+                print '************************************************ \n' \
+                  'YOU ARE THE VIP! CAN STORE INFINITE GOODS'
+            else:
+                print '************************************************ \n' \
+                      'THE GOODS ON STORAGE: %d, AND REMAIN STORAGE: %d' % (
+                      sum_number, storage_level[storage][0] - sum_number)
 
             pocket_money = pocket_money
             print '************************************************ \n' \
@@ -172,8 +176,12 @@ while step<11:
             resp = raw_input('\nDO YOU WANT TO EXPAND YOUR STORAGE ? Y/N ')
             if resp == 'Y' or resp == 'y':
                 level = raw_input('INPUT THE LEVEL NUMBER YOU WANT TO REACH ')
-                print 'IT CAN STORE %d GOODS AND THAT WILL COST $%.1f PER DAY' % \
-                      (storage_level[level][0], storage_level[level][1])
+                if level == 'INF' or level == 'inf':
+                    print 'IT CAN STORE INFINITE GOODS AND THAT WILL COST $%.1f PER DAY' % \
+                          (storage_level[level][1])
+                else:
+                    print 'IT CAN STORE %d GOODS AND THAT WILL COST $%.1f PER DAY' % \
+                          (storage_level[level][0], storage_level[level][1])
                 respp = raw_input('ARE YOU SURE ? Y/N ')
                 if respp == 'Y' or resp == 'y':
                     storage_new = level
@@ -203,6 +211,8 @@ while step<11:
 
 
             if storage_new == 'INF' or storage_new =='inf':
+                sum_number_new = n1 + int(buy1) - int(sell1) + n2 + int(buy2) - int(sell2) + \
+                                 n3 + int(buy3) - int(sell3) + n4 + int(buy4) - int(sell4)
                 print '************************************************ \n' \
                       'YOU ARE THE VIP! CAN STORE INFINITE GOODS'
             else:
