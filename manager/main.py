@@ -22,7 +22,7 @@ def case(original,now):
     if (now-original) / original <= -0.4:
         return ['DAMN IT! LARGE DECREASE', (now-original) / original]
 
-original_money = 500
+original_money = 100
 original_price1 = 1
 original_price2 = 5
 original_price3 = 10
@@ -41,7 +41,7 @@ price4 = original_price4
 pocket_money = original_money
 sum_money_old = original_money
 storage_level = {'1': [10, 2], '2': [25, 5], '3': [50, 10], '4': [100, 20], 'INF': ['INF', 100], 'inf':['inf', 100]}
-lamda = 2
+lamda = 5
 condition = 10
 
 while step<11:
@@ -240,13 +240,13 @@ while step<11:
                     market_money_old = market_money
                     pocket_money_old = pocket_money
                     sum_money_old = market_money_old + pocket_money_old
+                    storage = storage_new
                     pocket_money = pocket_money_new - storage_level[storage][1]
                     sum_number = sum_number_new
                     n1 = n1 + int(buy1) - int(sell1)
                     n2 = n2 + int(buy2) - int(sell2)
                     n3 = n3 + int(buy3) - int(sell3)
                     n4 = n4 + int(buy4) - int(sell4)
-                    storage = storage_new
                     break
                 else:
                     print '************************************************ \n' \
@@ -309,6 +309,63 @@ while step<11:
     step = step + 1
 
 
+
+print '\n' \
+      '\n' \
+      '~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ \n' \
+      'PRICE AND NUMBER AT TURN %d: \n ' \
+      '\n' \
+      ' GaoYiWen $%.1f \n' \
+      '  %s ~ Amount of Increase %.2f %%\n' \
+      '   The number you have %d \n' \
+      '\n' \
+      % (step,
+         price1, compare1[0], 100 * round(compare1[1], 4), n1)
+time.sleep(1)
+
+print ' XiaoSao $%.1f \n' \
+      '  %s ~ Amount of Increase %.2f %%\n' \
+      '   The number you have %d \n' \
+      '\n' \
+      % (price2, compare2[0], 100 * round(compare2[1], 4), n2,)
+time.sleep(1)
+
+print ' YiWenSheShou $%.1f\n' \
+      '  %s ~ Amount of Increase %.2f %%\n' \
+      '   The number you have %d \n' \
+      '\n' \
+      % (price3, compare3[0], 100 * round(compare3[1], 4), n3,)
+time.sleep(1)
+
+print ' GaoZong $%.1f \n' \
+      '  %s ~ Amount of Increase %.2f %% \n' \
+      '   The number you have %d \n' \
+      '\n' \
+      % (price4, compare4[0], 100 * round(compare4[1], 4), n4)
+
+print '************************************************ \n' \
+      'THE LEVEL OF YOUR STORAGE: LV.%s' % (storage)
+
+if storage == 'inf' or storage == 'INF':
+    print '************************************************ \n' \
+      'YOU ARE THE VIP! CAN STORE INFINITE GOODS'
+else:
+    print '************************************************ \n' \
+          'THE GOODS ON STORAGE: %d, AND REMAIN STORAGE: %d' % (
+          sum_number, storage_level[storage][0] - sum_number)
+
+pocket_money = pocket_money
+print '************************************************ \n' \
+      'MONEY ON YOUR POCKET: $%.1f' % (pocket_money)
+
+market_money = price1 * n1 + price2 * n2 + price3 * n3 + price4 * n4
+print '************************************************ \n' \
+      'MONEY ON MARKET: $%.1f' % (market_money)
+
+print '************************************************ \n' \
+      'MONEY ON POCKET AND MARKET: $%.1f  AMOUNT OF INCREASE: %.2f%%' \
+      % (market_money + pocket_money,
+         100 * round(((market_money + pocket_money) / sum_money_old - 1), 4))
 
 if (market_money + pocket_money) >= (original_money * 2):
     print '\n' \
