@@ -2,6 +2,79 @@ import numpy as np
 import random
 import time
 
+class LOSEPOCKETMONEY:
+    def __init__(self,pocket_money):
+        self.pocket_money = pocket_money
+    def LITTLELOSE(self,id):
+        if id == 1:
+            down = round(0.05 * self.pocket_money, 2)
+            up = round(0.1 * self.pocket_money, 2)
+            seed = random.randint(0, 99)
+            np.random.seed(seed)
+            lose = random.uniform(down, up)
+            return self.pocket_money - lose
+
+    def MIDIUMLOSE(self,id):
+        if id == 2:
+            down = round(0.2 * self.pocket_money, 2)
+            up = round(0.4 * self.pocket_money, 2)
+            seed = random.randint(0, 99)
+            np.random.seed(seed)
+            lose = random.uniform(down, up)
+            return self.pocket_money - lose
+
+    def LARGELOSE(self,id):
+        if id == 3:
+            down = round(0.3 * self.pocket_money, 2)
+            up = round(0.6 * self.pocket_money, 2)
+            seed = random.randint(0, 99)
+            np.random.seed(seed)
+            lose = random.uniform(down, up)
+            return self.pocket_money - lose
+
+class LOSEMARKETGOODS:
+    def __init__(self,n1,n2,n3,n4):
+        self.n1 = n1
+        self.n2 = n2
+        self.n3 = n3
+        self.n4 = n4
+    def LOSEGAOYIWEN(self,id):
+        if id == 1:
+            lose = random.randint(0, n1)
+            return self.n1 - lose
+    def LOSEXIAOSAO(self,id):
+        if id == 2:
+            lose = random.randint(0, n2)
+            return self.n2 - lose
+    def LOSEYIWENSHESHOU(self,id):
+        if id == 3:
+            lose = random.randint(0, n3)
+            return self.n3 - lose
+    def LOSEGAOZONG(self,id):
+        if id == 4:
+            lose = random.randint(0, n4)
+            return self.n4 - lose
+
+class CHANGEGOODSNUMBER:
+    def __init__(self, n1, n2, n3, n4):
+        self.n1 = n1
+        self.n2 = n2
+        self.n3 = n3
+        self.n4 = n4
+    def CHANGEN1N2(self,id):
+        pass
+    def CHANGEN1N3(self,id):
+        pass
+    def CHANGEN1N4(self,id):
+        pass
+    def CHANGEN2N3(self,id):
+        pass
+    def CHANGEN2N4(self,id):
+        pass
+    def CHANGEN3N4(self,id):
+        pass
+
+
 def case(original,now):
     if (now-original) / original == 0:
         return ['IT IS A COMMON DAY! UNCHANGED', (now-original) / original]
@@ -307,6 +380,7 @@ while step<11:
     compare4 = case(price4_old, price4)
 
     step = step + 1
+
 
 
 
