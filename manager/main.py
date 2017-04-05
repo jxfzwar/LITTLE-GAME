@@ -55,26 +55,6 @@ class LOSEMARKETGOODS:
             lose = random.randint(0, n4)
             return lose
 
-class CHANGEGOODSNUMBER:
-    def __init__(self, n1, n2, n3, n4):
-        self.n1 = n1
-        self.n2 = n2
-        self.n3 = n3
-        self.n4 = n4
-    def CHANGEN1N2(self,id):
-        pass
-    def CHANGEN1N3(self,id):
-        pass
-    def CHANGEN1N4(self,id):
-        pass
-    def CHANGEN2N3(self,id):
-        pass
-    def CHANGEN2N4(self,id):
-        pass
-    def CHANGEN3N4(self,id):
-        pass
-
-
 def case(original,now):
     if (now-original) / original == 0:
         return ['IT IS A COMMON DAY! UNCHANGED', (now-original) / original]
@@ -420,6 +400,20 @@ while step<11:
                   '!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!' \
                   'IT IS SORRY TO TELL YOU THAT WE LOSE $%.1f POCKET MONEY T^T' \
                   % (lose)
+    elif pocket_money <= 50:
+        seed = random.randint(0, 99)
+        np.random.seed(seed)
+        randompool = random.uniform(0, 1)
+        if randompool > 0.5:
+            ob = LOSEPOCKETMONEY(pocket_money)
+            add = random.randint(50, 100)
+            pocket_money = pocket_money + add
+            print '\n' \
+                  '\n' \
+                  '!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!' \
+                  'LUCKILY! WE OBTAIN $%.1f POCKET MONEY FROM GOD' \
+                  % (add)
+
 
     if n1 > 200:
         seed = random.randint(0, 99)
@@ -432,7 +426,7 @@ while step<11:
             print '\n' \
                   '\n' \
                   '!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!' \
-                  'IT IS SORRY TO TELL YOU THAT WE LOSE %d GAO YI WEN T^T' \
+                  'IT IS SORRY TO TELL YOU THAT WE LOSE %d GaoYiWen T^T' \
                   % (lose)
 
 
@@ -447,7 +441,7 @@ while step<11:
             print '\n' \
                   '\n' \
                   '!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!' \
-                  'IT IS SORRY TO TELL YOU THAT WE LOSE %d XIAOSAO T^T' \
+                  'IT IS SORRY TO TELL YOU THAT WE LOSE %d XiaoSao T^T' \
                   % (lose)
 
     if n3 > 200:
@@ -461,7 +455,7 @@ while step<11:
             print '\n' \
                   '\n' \
                   '!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!' \
-                  'IT IS SORRY TO TELL YOU THAT WE LOSE %d YI WEN SHE SHOU T^T' \
+                  'IT IS SORRY TO TELL YOU THAT WE LOSE %d YiWenSheShou T^T' \
                   % (lose)
 
     if n4 > 200:
@@ -475,13 +469,73 @@ while step<11:
             print '\n' \
                   '\n' \
                   '!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!' \
-                  'IT IS SORRY TO TELL YOU THAT WE LOSE %d GAO ZONG T^T' \
+                  'IT IS SORRY TO TELL YOU THAT WE LOSE %d GaoZong T^T' \
                   % (lose)
 
     n1 = n1_afterlose
     n2 = n2_afterlose
     n3 = n3_afterlose
     n4 = n4_afterlose
+
+    seed = random.randint(0, 99)
+    np.random.seed(seed)
+    randompool = random.uniform(0, 1)
+    if randompool > 0.95:
+        seed = random.randint(0, 99)
+        np.random.seed(seed)
+        randompool = random.randint(0.5, 6.5)
+        if randompool == 1:
+            n1 = n1 + n2
+            n2 = n1 - n2
+            n1 = n1 - n2
+            print '\n' \
+                  '\n' \
+                  '!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!' \
+                  'TRICK~~~THE NUMBER OF GaoYiWen AND XiaoSao HAVE CHANGED'
+        if randompool == 2:
+            n1 = n1 + n3
+            n3 = n1 - n3
+            n1 = n1 - n3
+            print '\n' \
+                  '\n' \
+                  '!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!' \
+                  'TRICK~~~THE NUMBER OF GaoYiWen AND YiWenSheShou HAVE CHANGED'
+        if randompool == 3:
+            n1 = n1 + n4
+            n4 = n1 - n4
+            n1 = n1 - n4
+            print '\n' \
+                  '\n' \
+                  '!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!' \
+                  'TRICK~~~THE NUMBER OF GaoYiWen AND GaoZong HAVE CHANGED'
+        if randompool == 4:
+            n2 = n2 + n3
+            n3 = n2 - n3
+            n2 = n2 - n3
+            print '\n' \
+                  '\n' \
+                  '!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!' \
+                  'TRICK~~~THE NUMBER OF XiaoSao AND YiWenSheShou HAVE CHANGED'
+        if randompool == 5:
+            n2 = n2 + n4
+            n4 = n2 - n4
+            n2 = n2 - n4
+            print '\n' \
+                  '\n' \
+                  '!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!' \
+                  'TRICK~~~THE NUMBER OF XiaoSao AND GaoZong HAVE CHANGED'
+        if randompool == 6:
+            n3 = n3 + n4
+            n4 = n3 - n4
+            n3 = n3 - n4
+            print '\n' \
+                  '\n' \
+                  '!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!' \
+                  'TRICK~~~THE NUMBER OF YiWenSheShou AND GaoZong HAVE CHANGED'
+
+
+
+
 
 
 print '\n' \
