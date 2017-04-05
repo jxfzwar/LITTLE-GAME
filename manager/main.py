@@ -7,30 +7,30 @@ class LOSEPOCKETMONEY:
         self.pocket_money = pocket_money
     def LITTLELOSE(self,id):
         if id == 1:
-            down = round(0.05 * self.pocket_money, 2)
-            up = round(0.1 * self.pocket_money, 2)
+            down = round(0.05 * self.pocket_money, 1)
+            up = round(0.1 * self.pocket_money, 1)
             seed = random.randint(0, 99)
             np.random.seed(seed)
             lose = random.uniform(down, up)
-            return self.pocket_money - lose
+            return lose
 
     def MIDIUMLOSE(self,id):
         if id == 2:
-            down = round(0.2 * self.pocket_money, 2)
-            up = round(0.4 * self.pocket_money, 2)
+            down = round(0.2 * self.pocket_money, 1)
+            up = round(0.4 * self.pocket_money, 1)
             seed = random.randint(0, 99)
             np.random.seed(seed)
             lose = random.uniform(down, up)
-            return self.pocket_money - lose
+            return lose
 
     def LARGELOSE(self,id):
         if id == 3:
-            down = round(0.3 * self.pocket_money, 2)
-            up = round(0.6 * self.pocket_money, 2)
+            down = round(0.3 * self.pocket_money, 1)
+            up = round(0.6 * self.pocket_money, 1)
             seed = random.randint(0, 99)
             np.random.seed(seed)
             lose = random.uniform(down, up)
-            return self.pocket_money - lose
+            return lose
 
 class LOSEMARKETGOODS:
     def __init__(self,n1,n2,n3,n4):
@@ -41,19 +41,19 @@ class LOSEMARKETGOODS:
     def LOSEGAOYIWEN(self,id):
         if id == 1:
             lose = random.randint(0, n1)
-            return self.n1 - lose
+            return lose
     def LOSEXIAOSAO(self,id):
         if id == 2:
             lose = random.randint(0, n2)
-            return self.n2 - lose
+            return lose
     def LOSEYIWENSHESHOU(self,id):
         if id == 3:
             lose = random.randint(0, n3)
-            return self.n3 - lose
+            return lose
     def LOSEGAOZONG(self,id):
         if id == 4:
             lose = random.randint(0, n4)
-            return self.n4 - lose
+            return lose
 
 class CHANGEGOODSNUMBER:
     def __init__(self, n1, n2, n3, n4):
@@ -114,7 +114,7 @@ price4 = original_price4
 pocket_money = original_money
 sum_money_old = original_money
 storage_level = {'1': [10, 2], '2': [25, 5], '3': [50, 10], '4': [100, 20], 'INF': ['INF', 100], 'inf':['inf', 100]}
-lamda = 5
+lamda = 8
 condition = 10
 
 while step<11:
@@ -381,7 +381,107 @@ while step<11:
 
     step = step + 1
 
+    if pocket_money >= 500 and pocket_money < 1000:
+        seed = random.randint(0, 99)
+        np.random.seed(seed)
+        randompool = random.uniform(0, 1)
+        if randompool > 0.8:
+            ob = LOSEPOCKETMONEY(pocket_money)
+            lose = ob.LITTLELOSE(1)
+            pocket_money = pocket_money - lose
+            print '\n' \
+                  '\n' \
+                  '!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!' \
+                  'IT IS SORRY TO TELL YOU THAT WE LOSE $%.1f POCKET MONEY T^T' \
+                  % (lose)
+    elif pocket_money >= 1000 and pocket_money < 2000:
+        seed = random.randint(0, 99)
+        np.random.seed(seed)
+        randompool = random.uniform(0, 1)
+        if randompool > 0.6:
+            ob = LOSEPOCKETMONEY(pocket_money)
+            lose = ob.MIDIUMLOSE(2)
+            pocket_money = pocket_money - lose
+            print '\n' \
+                  '\n' \
+                  '!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!' \
+                  'IT IS SORRY TO TELL YOU THAT WE LOSE $%.2f POCKET MONEY T^T' \
+                  % (lose)
+    elif pocket_money >= 2000:
+        seed = random.randint(0, 99)
+        np.random.seed(seed)
+        randompool = random.uniform(0, 1)
+        if randompool > 0.5:
+            ob = LOSEPOCKETMONEY(pocket_money)
+            lose = ob.LARGELOSE(3)
+            pocket_money = pocket_money - lose
+            print '\n' \
+                  '\n' \
+                  '!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!' \
+                  'IT IS SORRY TO TELL YOU THAT WE LOSE $%.1f POCKET MONEY T^T' \
+                  % (lose)
 
+    if n1 > 200:
+        seed = random.randint(0, 99)
+        np.random.seed(seed)
+        randompool = random.uniform(0, 1)
+        if randompool > 0.5:
+            ob = LOSEMARKETGOODS(n1, n2, n3, n4)
+            lose = ob.LOSEGAOYIWEN(1)
+            n1_afterlose = n1 - lose
+            print '\n' \
+                  '\n' \
+                  '!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!' \
+                  'IT IS SORRY TO TELL YOU THAT WE LOSE %d GAO YI WEN T^T' \
+                  % (lose)
+
+
+    if n2 > 200:
+        seed = random.randint(0, 99)
+        np.random.seed(seed)
+        randompool = random.uniform(0, 1)
+        if randompool > 0.5:
+            ob = LOSEMARKETGOODS(n1, n2, n3, n4)
+            lose = ob.LOSEXIAOSAO(2)
+            n2_afterlose = n2 - lose
+            print '\n' \
+                  '\n' \
+                  '!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!' \
+                  'IT IS SORRY TO TELL YOU THAT WE LOSE %d XIAOSAO T^T' \
+                  % (lose)
+
+    if n3 > 200:
+        seed = random.randint(0, 99)
+        np.random.seed(seed)
+        randompool = random.uniform(0, 1)
+        if randompool > 0.5:
+            ob = LOSEMARKETGOODS(n1, n2, n3, n4)
+            lose = ob.LOSEYIWENSHESHOU(3)
+            n3_afterlose = n3 - lose
+            print '\n' \
+                  '\n' \
+                  '!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!' \
+                  'IT IS SORRY TO TELL YOU THAT WE LOSE %d YI WEN SHE SHOU T^T' \
+                  % (lose)
+
+    if n4 > 200:
+        seed = random.randint(0, 99)
+        np.random.seed(seed)
+        randompool = random.uniform(0, 1)
+        if randompool > 0.5:
+            ob = LOSEMARKETGOODS(n1, n2, n3, n4)
+            lose = ob.LOSEGAOZONG(4)
+            n4_afterlose = n4 - lose
+            print '\n' \
+                  '\n' \
+                  '!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!' \
+                  'IT IS SORRY TO TELL YOU THAT WE LOSE %d GAO ZONG T^T' \
+                  % (lose)
+
+    n1 = n1_afterlose
+    n2 = n2_afterlose
+    n3 = n3_afterlose
+    n4 = n4_afterlose
 
 
 print '\n' \
@@ -441,7 +541,7 @@ print '************************************************ \n' \
       % (market_money + pocket_money,
          100 * round(((market_money + pocket_money) / sum_money_old - 1), 4))
 
-if (market_money + pocket_money) >= (original_money * 2):
+if (market_money + pocket_money) >= (original_money * lamda):
     print '\n' \
           '\n' \
           '\n' \
