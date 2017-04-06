@@ -1,6 +1,7 @@
 import numpy as np
 import random
 import time
+import os
 
 class LOSEPOCKETMONEY:
     def __init__(self,pocket_money):
@@ -102,20 +103,38 @@ while step<11:
     while True:
 
         if step == 0:
+
+            if os.path.exists('record'):
+                pass
+            else:
+                recordinit = open('record', 'w')
+                recordinit.write('%s\n%s' % ('NULL', str(0)))
+                recordinit.close()
+
             print '$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ \n' \
-                  'WELCOME TO THE GAME - BATTLE OF GAO YI WEN \n' \
-                  'AT THIS GAME, YOU MUST BUY THE GOODS WITHIN THE LIMIT OF STORAGE LEVEL \n' \
+                  'WELCOME TO THE GAME - BATTLE OF GAO YI WEN \n'
+            name = raw_input('INPUT YOUR NAME: ')
+            mode = raw_input('\n'
+                             'CHOOSE GAME MODE YOU WANT TO PLAY: A. TASK MODE B. RECORD MODE\n'
+                             'INPUT A OR B (A/B) ')
+            print 'AT THIS GAME, YOU MUST BUY THE GOODS WITHIN THE LIMIT OF STORAGE LEVEL \n' \
                   'YOU CAN INCREASE OR DECREASE THE STORAGE LEVEL EVERY TURN \n' \
                   'LEVEL    NUMBER OF MAXIMUM GOODS           COST PER DAY  \n' \
                   '1                 10                             2       \n' \
                   '2                 25                             5      \n' \
                   '3                 50                             10      \n' \
                   '4                 100                            20      \n' \
-                  'INF               INF                            100     \n' \
-                  'CONDITION OF WIN: \n' \
-                  'AFTER %d TURNS, MONEY IN YOUR POCKET + THE VALUE OF STORAGE >= %.1f \n' \
-                  '~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ \n' \
-                  'PRICE AND NUMBER AT TURN %d: \n ' \
+                  'INF               INF                            100     \n'
+            if mode == 'A':
+                print 'CONDITION OF WIN: \n' \
+                      'AFTER %d TURNS, MONEY IN YOUR POCKET + THE VALUE OF STORAGE >= %.1f \n' \
+                      '~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ \n' \
+                      % (condition, original_money * lamda)
+            elif mode == 'B':
+                print 'TRY TO EARN MORE MONEY AT %d TURNS, GO GO GO!' \
+                      % (condition)
+
+            print 'PRICE AND NUMBER AT TURN %d: \n ' \
                   '\n' \
                   ' GaoYiWen $%.1f \n' \
                   '  The number you have %d \n' \
@@ -128,7 +147,7 @@ while step<11:
                   '\n' \
                   ' GaoZong $%.1f \n' \
                   '  The number you have %d \n' \
-                  % (condition, original_money * lamda, step,
+                  % (step,
                      original_price1, n1,
                      original_price2, n2,
                      original_price3, n3,
@@ -378,7 +397,7 @@ while step<11:
         seed = random.randint(0, 99)
         np.random.seed(seed)
         randompool = random.uniform(0, 1)
-        if randompool > 0.6:
+        if randompool > 0.75:
             ob = LOSEPOCKETMONEY(pocket_money)
             lose = ob.MIDIUMLOSE(2)
             pocket_money = pocket_money - lose
@@ -405,8 +424,7 @@ while step<11:
         np.random.seed(seed)
         randompool = random.uniform(0, 1)
         if randompool > 0.5:
-            ob = LOSEPOCKETMONEY(pocket_money)
-            add = random.randint(50, 100)
+            add = random.randint(50, 200)
             pocket_money = pocket_money + add
             print '\n' \
                   '\n' \
@@ -415,7 +433,7 @@ while step<11:
                   % (add)
 
 
-    if n1 > 200:
+    if n1 > 300:
         seed = random.randint(0, 99)
         np.random.seed(seed)
         randompool = random.uniform(0, 1)
@@ -430,7 +448,7 @@ while step<11:
                   % (lose)
 
 
-    if n2 > 200:
+    if n2 > 150:
         seed = random.randint(0, 99)
         np.random.seed(seed)
         randompool = random.uniform(0, 1)
@@ -444,7 +462,7 @@ while step<11:
                   'IT IS SORRY TO TELL YOU THAT WE LOSE %d XiaoSao T^T' \
                   % (lose)
 
-    if n3 > 200:
+    if n3 > 100:
         seed = random.randint(0, 99)
         np.random.seed(seed)
         randompool = random.uniform(0, 1)
@@ -458,7 +476,7 @@ while step<11:
                   'IT IS SORRY TO TELL YOU THAT WE LOSE %d YiWenSheShou T^T' \
                   % (lose)
 
-    if n4 > 200:
+    if n4 > 50:
         seed = random.randint(0, 99)
         np.random.seed(seed)
         randompool = random.uniform(0, 1)
@@ -533,11 +551,6 @@ while step<11:
                   '!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!' \
                   'TRICK~~~THE NUMBER OF YiWenSheShou AND GaoZong HAVE CHANGED'
 
-
-
-
-
-
 print '\n' \
       '\n' \
       '~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ \n' \
@@ -595,20 +608,52 @@ print '************************************************ \n' \
       % (market_money + pocket_money,
          100 * round(((market_money + pocket_money) / sum_money_old - 1), 4))
 
-if (market_money + pocket_money) >= (original_money * lamda):
-    print '\n' \
-          '\n' \
-          '\n' \
-          '************************************************ \n' \
-          '********************* WIN ********************** \n' \
-          '************************************************'
-else:
-    print '\n' \
-          '\n' \
-          '\n' \
-          '************************************************ \n' \
-          '********************* LOSE ********************* \n' \
-          '************************************************'
+if mode == 'A':
+
+    if (market_money + pocket_money) >= (original_money * lamda):
+        print '\n' \
+              '\n' \
+              '\n' \
+              '************************************************ \n' \
+              '********************* WIN ********************** \n' \
+              '************************************************'
+    else:
+        print '\n' \
+              '\n' \
+              '\n' \
+              '************************************************ \n' \
+              '********************* LOSE ********************* \n' \
+              '************************************************'
+
+elif mode == 'B':
+
+    recordread = open('record')
+    record = recordread.readlines()
+    recordread.close()
+    if market_money + pocket_money > float(record[1]):
+        recordmodify = open('record','w')
+        recordmodify.write('%s\n%s' % (name, str(market_money + pocket_money)))
+        recordmodify.close()
+        print '\n' \
+              '\n' \
+              '\n' \
+              '************************************************ \n' \
+              '******************CONGRADUATION***************** \n' \
+              '*******************NEW**RECORD****************** \n' \
+              '%s : $%.1f' \
+              % (name, market_money + pocket_money)
+    else:
+        print '\n' \
+              '\n' \
+              '\n' \
+              '************************************************ \n' \
+              '*****************NO**NEW**RECORD**************** \n' \
+              '****************KEEP**CHALLENGING*************** \n' \
+              '************RECORD**STILL**BELONGS**TO********** \n' \
+              '%s : $%.1f' \
+              % (record[0], float(record[1]))
+
+
 
 
 
